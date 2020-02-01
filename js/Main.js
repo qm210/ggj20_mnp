@@ -48,7 +48,7 @@ class Main extends Phaser.Scene {
         this.startMenu = [];
 
         this.desktopButtons = [
-            new FolderButton(this, 40, 100, 'My Computer', 'folder', this.openFileBrowser, "lightgreen"),
+            new FileButton(this, 40, 100, 'My Computer', 'folder', this.openFileBrowser, "lightgreen"),
         ]
     }
 
@@ -125,8 +125,7 @@ class Main extends Phaser.Scene {
 
 }
 
-// TODO: find out how ANY click outside of the menu works - to close the start menu
-// TODO: file manager
+// TODO: error message
 // TODO: usb drive menu (super complicated..!)
 // TODO: task list
 // TODO: progress bar

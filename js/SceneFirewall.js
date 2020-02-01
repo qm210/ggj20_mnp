@@ -1,7 +1,7 @@
 class Firewall extends Phaser.Scene {
 
-    static X = 500;
-    static Y = 100;
+    static X = 630;
+    static Y = 170;
 
     constructor() {
         super('SceneFirewall');

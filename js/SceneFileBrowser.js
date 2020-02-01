@@ -19,6 +19,7 @@ class FileBrowser extends Phaser.Scene {
             "\'School\'": 'folder',
             "Temp": 'folder',
             "System": 'folder',
+            "porniporn.avi": 'moviefile',
         },
         "C:\\Users\\": {
             "NIX": 'folder',
@@ -138,31 +139,9 @@ class FileBrowser extends Phaser.Scene {
         for(const [itemLabel, itemType] of Object.entries(newContent)) {
             let itemX = FileBrowser.contentX + FileBrowser.contentSpacing * (counter % FileBrowser.contentRowLength);
             let itemY = FileBrowser.contentY + FileBrowser.contentSpacing * Math.floor(counter / FileBrowser.contentRowLength);
-            switch (itemType) {
-                case 'folder':
-                case 'drive':
-                        this.pathContent.push(
-                        new FolderButton(this, itemX, itemY, itemLabel, itemType, () => {this.clickFolder(path, itemLabel);})
-                    );
-                    break;
-
-                case 'usb':
-                    this.pathContent.push(
-                        new FolderButton(this, itemX, itemY, itemLabel, itemType, () => {this.clickFolder(path, itemLabel);})
-                    );
-                    break;
-
-                case 'file':
-                case 'moviefile':
-                    this.pathContent.push(
-                        new FolderButton(this, itemX, itemY, itemLabel, itemType, () => {this.clickFile(path, itemLabel, itemType);})
-                    );
-                    break;
-
-                default:
-                    console.log(`wtf type..? ${path}, ${itemLabel}`);
-
-                }
+            this.pathContent.push(
+                new FileButton(this, itemX, itemY, itemLabel, itemType, () => {this.clickFile(path, itemLabel, itemType);})
+            );
             counter++
         }
         this.update();
@@ -182,21 +161,26 @@ class FileBrowser extends Phaser.Scene {
     }
 
     clickFolder(path, folder) {
-        let newPath = path == "My Computer" ? folder : `${path}${folder}\\`.replace('\n', '');
-        if (this.lastClicked != newPath) {
-            this.lastClicked = newPath
-            this.updateStatusBar(newPath);
+        let fullPath = path == "My Computer" ? folder : `${path}${folder}\\`.replace('\n', '');
+        if (this.lastClicked != fullPath) {
+            this.lastClicked = fullPath
+            this.updateStatusBar(fullPath);
         }
         else {
-            this.loadPath(newPath);
+            this.loadPath(fullPath);
         }
     }
 
     clickFile(path, file, type) {
-        let fullPath = `${path}${folder}`;
-        if (this.lastClicked != newPath) {
-            this.lastClicked = newPath
-            this.updateStatusBar(newPath);
+        if (['folder', 'drive', 'usb'].includes(type)) {
+            this.clickFolder(path, file);
+            return;
+        }
+
+        let fullPath = `${path}${file}`;
+        if (this.lastClicked != fullPath) {
+            this.lastClicked = fullPath
+            this.updateStatusBar(fullPath);
         }
         else {
             switch (type) {
@@ -207,10 +191,26 @@ class FileBrowser extends Phaser.Scene {
 
                 case 'moviefile':
                     console.log(`movie ${fullPath}`)
+                    this.openMoviePlayer(fullPath)
                     break;
 
             }
         }
+    }
+
+    openMoviePlayer(path) {
+        this.scene.launch('ErrorMessage', {
+            'parent': this,
+            'message': 'MoviePlayer++ v.9 requires update\nor else you will get murdered\nwith a chainsaw!\n(and also deserve it)',
+            'buttons': [
+                {text: 'Update', deltaX: -120, deltaY: 0, onDown: () => {
+                    console.log("update");
+                }},
+                {text: 'No Thx!', deltaX: 120, deltaY: 0, onDown: () => {
+                    console.log("blöh");
+                }},
+            ],
+        });
     }
 
 }

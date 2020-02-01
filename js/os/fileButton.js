@@ -1,4 +1,4 @@
-class FolderButton extends Phaser.GameObjects.Image {
+class FileButton extends Phaser.GameObjects.Image {
 
     constructor(scene, x, y, label, texture, onDown, textColor) {
         textColor = textColor || "black"
