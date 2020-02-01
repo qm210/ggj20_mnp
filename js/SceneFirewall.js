@@ -13,7 +13,7 @@ class Firewall extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'assets/firewalltool/background.png');
+        this.load.image('firewallBackground', 'assets/firewalltool/background.png');
         this.load.spritesheet('buttonX', 'assets/firewalltool/X.png',{
             frameWidth: 56,
             frameHeight: 61,
@@ -24,7 +24,7 @@ class Firewall extends Phaser.Scene {
 
     create() {
         // TODO: find out how to have a scene smaller than the screen; and how to find its borders
-        this.bg = this.add.image(Firewall.X, Firewall.Y, 'background').setOrigin(0, 0);
+        this.bg = this.add.image(Firewall.X, Firewall.Y, 'firewallBackground').setOrigin(0, 0);
 
         this.buttonX = new SimpleButton(this, {
             'key': 'buttonX',

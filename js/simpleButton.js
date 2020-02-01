@@ -15,9 +15,9 @@ class SimpleButton extends Phaser.GameObjects.Sprite {
                 this.setFrame(config.up);
             }, 100);
             this.onDown();
-        });
-        this.on('pointerover', () => {this.setFrame(config.over)});
-        this.on('pointerout', () => {this.setFrame(config.up)});
+        }, scene);
+        this.on('pointerover', () => {this.setFrame(config.over)}, scene);
+        this.on('pointerout', () => {this.setFrame(config.up)}, scene);
     }
 
 }
