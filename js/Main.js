@@ -33,9 +33,13 @@ class Main extends Phaser.Scene {
             frameWidth: startMenuEntryWidth,
             frameHeight: startMenuEntryHeight,
         });
+
+        this.load.glsl('glitch', 'frag/glitch.frag');
     }
 
     create() {
+        this.renderTexture = this.add.renderTexture(0,0,screen.frameWidth, screen.frameHeight);
+
         this.background = this.add.image(0, 0, 'background').setOrigin(0, 0).setInteractive();
         this.background.on('pointerdown', this.clickBackground, this);
 
@@ -50,10 +54,16 @@ class Main extends Phaser.Scene {
         this.desktopButtons = [
             new FileButton(this, 40, 100, 'My Computer', 'folder', this.openFileBrowser, "lightgreen"),
         ]
+
+        var canvas_width = window.innerWidth * window.devicePixelRatio;
+        var canvas_height = window.innerHeight * window.devicePixelRatio;
+
+        this.glitchShader = this.add.shader('glitch', 0., 0., canvas_width, canvas_height);
     }
 
     update() {
         this.handleRussianAttacks();
+        this.glitchShader.uniforms.amount.value = .3;
     }
 
     // todo: move this somehow to startButton.js so this.scene is clear...
