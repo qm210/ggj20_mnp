@@ -11,8 +11,6 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float amount;
 
-// float amount = .5;
-
 const vec3 c = vec3(1.,0.,-1.);
 
 void rand(in vec2 x, out float n)
