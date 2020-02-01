@@ -3,6 +3,7 @@ class StartButton extends Phaser.GameObjects.Image {
     constructor(scene, x, y, texture, textureClicked, scale) {
         super(scene, x, y, texture);
         this.scene = scene;
+        this.originalTexture = texture;
 
         this.setInteractive({
             useHandCursor: true,
@@ -12,10 +13,11 @@ class StartButton extends Phaser.GameObjects.Image {
 
         this.on('pointerdown', () => {
             this.setTexture(textureClicked);
-            setTimeout(() => {
-                this.setTexture(texture);
-            }, 100);
         });
+    }
+
+    snapBack() {
+        this.setTexture(this.originalTexture);
     }
 
 }

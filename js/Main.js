@@ -68,6 +68,7 @@ class Main extends Phaser.Scene {
         this.startMenu.forEach(button => {
             button.destroy();
         });
+        this.buttonStart.snapBack();
     }
 
     clickSearchButton() {
@@ -92,3 +93,9 @@ class Main extends Phaser.Scene {
     }
 
 }
+
+// TODO: find out how ANY click outside of the menu works - to close the start menu
+// TODO: file manager
+// TODO: usb drive menu (super complicated..!)
+// TODO: task list
+// TODO: progress bar
