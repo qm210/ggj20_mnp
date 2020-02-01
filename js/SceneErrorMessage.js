@@ -29,6 +29,8 @@ class ErrorMessage extends Phaser.Scene {
         console.log(data.parent);
         this.parent = data.parent || null;
         this.message = data.message || '<unknown error>'
+        this.deltaX = data.deltaX || 0
+        this.deltaY = data.deltaY || 0
         if(!data.buttons) {
             this.buttons = [ErrorMessage.defaultButton(this)];
         }
@@ -36,8 +38,8 @@ class ErrorMessage extends Phaser.Scene {
             this.buttons = []
             data.buttons.forEach(buttonPar => {
                 let templateButton = ErrorMessage.defaultButton(this);
-                templateButton.x += buttonPar.deltaX;
-                templateButton.y += buttonPar.deltaY;
+                templateButton.x += buttonPar.deltaX + this.deltaX;
+                templateButton.y += buttonPar.deltaY + this.deltaY;
                 templateButton.setText(buttonPar.text)
                 if (buttonPar.onDown) {
                     templateButton.onDown = (() => {
@@ -49,8 +51,8 @@ class ErrorMessage extends Phaser.Scene {
             })
         }
 
-        this.X = ErrorMessage.X + (data.deltaX || 0)
-        this.Y = ErrorMessage.Y + (data.deltaY || 0)
+        this.X = ErrorMessage.X + this.deltaX
+        this.Y = ErrorMessage.Y + this.deltaY
     }
 
     static defaultButton(scene) {

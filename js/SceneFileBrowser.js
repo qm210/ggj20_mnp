@@ -207,9 +207,11 @@ class FileBrowser extends Phaser.Scene {
                     console.log("update");
                 }},
                 {text: 'No Thx!', deltaX: 120, deltaY: 0, onDown: () => {
-                    console.log("blöh");
+                    console.log("no update");
                 }},
             ],
+            'deltaX': Phaser.Math.Between(-400, 400),
+            'deltaY': Phaser.Math.Between(-200, 200),
         });
     }
 
