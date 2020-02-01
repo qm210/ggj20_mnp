@@ -55,15 +55,12 @@ class Main extends Phaser.Scene {
             new FileButton(this, 40, 100, 'My Computer', 'folder', this.openFileBrowser, "lightgreen"),
         ]
 
-        var canvas_width = window.innerWidth * window.devicePixelRatio;
-        var canvas_height = window.innerHeight * window.devicePixelRatio;
-
-        this.glitchShader = this.add.shader('glitch', 0., 0., canvas_width, canvas_height);
+        this.glitchShader = this.add.shader('glitch', 0., 0., config.width, config.height).setOrigin(0, 0);
     }
 
     update() {
         this.handleRussianAttacks();
-        this.glitchShader.uniforms.amount.value = .3;
+        this.glitchShader.uniforms.amount.value = .1;
     }
 
     // todo: move this somehow to startButton.js so this.scene is clear...
