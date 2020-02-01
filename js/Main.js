@@ -21,7 +21,9 @@ class Main extends Phaser.Scene {
         this.load.image('background', "assets/os/background.png");
         this.load.image('buttonStart', "assets/os/startbutton.png");
         this.load.image('buttonStartClicked', "assets/os/startbutton_clicked.png");
-        this.buttonScale = 0.5;
+        this.startButtonScale = 0.5;
+
+        this.load.image('folder', "assets/os/folder.png");
 
         this.load.spritesheet('startMenu', "assets/os/startmenu.png", {
             frameWidth: startMenuEntryWidth,
@@ -35,11 +37,15 @@ class Main extends Phaser.Scene {
 
         this.add.text(20, 20, "Please your mom, please!", {font: "30px Arial", fill: "yellow"});
 
-        this.buttonStart = new StartButton(this, 0, config.height, "buttonStart", "buttonStartClicked", this.buttonScale);
+        this.buttonStart = new StartButton(this, 0, config.height, "buttonStart", "buttonStartClicked", this.startButtonScale);
         this.add.existing(this.buttonStart);
         this.buttonStart.on('pointerdown', this.openStartMenu, this);
 
         this.startMenu = [];
+
+        this.desktopButtons = [
+            new FolderButton(this, 30, 100, 'My Computer', 'folder')
+        ]
     }
 
     update() {
