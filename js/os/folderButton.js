@@ -1,11 +1,7 @@
 class FolderButton extends Phaser.GameObjects.Image {
 
-    static labelStyle = {
-        font: "18px Arial",
-        fill: "lightgreen"
-    }
-
-    constructor(scene, x, y, label, texture, onDown) {
+    constructor(scene, x, y, label, texture, onDown, textColor) {
+        textColor = textColor || "black"
         super(scene, x, y, texture);
         this.scene = scene;
         this.onDown = onDown || (() => {})
@@ -15,10 +11,13 @@ class FolderButton extends Phaser.GameObjects.Image {
             .setInteractive({useHandCursor: true})
             .on('pointerdown', this.onDown, scene);
 
-        scene.add.text(x + .5 * this.texture.getSourceImage().width, y + this.texture.getSourceImage().height + 10, label, FolderButton.labelStyle)
-            .setOrigin(.5, .5)
+        this.labelText = scene.add.text(x + .5 * this.texture.getSourceImage().width, y + this.texture.getSourceImage().height, label, {
+                font: "18px Arial",
+                fill: textColor
+            })
+            .setOrigin(.5, 0)
             .setInteractive({useHandCursor: true})
-            .on('pointerdown', this.onDown, scene);
+            .on('pointerdown', () => {this.onDown();}, scene);
     }
 
 }

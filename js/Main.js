@@ -3,7 +3,7 @@ const startMenuEntryHeight = 75;
 
 class Main extends Phaser.Scene {
 
-    static RussianAttackRate = .03;
+    static RussianAttackRate = .015;
 
     constructor() {
         super('SceneMain')
@@ -24,6 +24,10 @@ class Main extends Phaser.Scene {
         this.startButtonScale = 0.5;
 
         this.load.image('folder', "assets/os/folder.png");
+        this.load.image('drive', "assets/os/drive.png");
+        this.load.image('usb', "assets/os/usb.png");
+        this.load.image('file', "assets/os/file.png");
+        this.load.image('moviefile', "assets/os/moviefile.png");
 
         this.load.spritesheet('startMenu', "assets/os/startmenu.png", {
             frameWidth: startMenuEntryWidth,
@@ -44,7 +48,7 @@ class Main extends Phaser.Scene {
         this.startMenu = [];
 
         this.desktopButtons = [
-            new FolderButton(this, 30, 100, 'My Computer', 'folder')
+            new FolderButton(this, 40, 100, 'My Computer', 'folder', this.openFileBrowser, "lightgreen"),
         ]
     }
 
@@ -70,8 +74,7 @@ class Main extends Phaser.Scene {
 
         startMenuFunctions.forEach( (func, index) =>
         {
-            this.startMenu.push(
-                new SimpleButton(this, {
+            this.startMenu.push(new SimpleButton(this, {
                 'key': 'startMenu',
                 'up': 2 * index,
                 'over': 2 * index + 1,
@@ -95,6 +98,10 @@ class Main extends Phaser.Scene {
         this.collapseStartMenu();
     }
 
+    openFileBrowser() {
+        this.scene.launch('SceneFileBrowser', {'parent': this});
+    }
+
     clickSearchButton() {
         console.log(`shitfuck ${this.scene.firewallRunning}`);
     }
@@ -110,7 +117,7 @@ class Main extends Phaser.Scene {
 
     handleRussianAttacks() {
         if (!this.firewallRunning) {
-            if (Phaser.Math.Between(0, 100) < Main.RussianAttackRate * 100) {
+            if (Phaser.Math.Between(0, 1000) < Main.RussianAttackRate * 1000) {
                 this.attacksFromRussians++;
             }
         }
