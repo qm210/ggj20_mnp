@@ -4,6 +4,6 @@ var config = {
     backgroundColor: 0x000000,
     scene: [Main, FileBrowser, ErrorMessage, Firewall],
     type: Phaser.WEBGL,
-}
+};
 
 var game = new Phaser.Game(config);

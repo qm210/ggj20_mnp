@@ -35,6 +35,16 @@ class Main extends Phaser.Scene {
         });
 
         this.load.glsl('glitch', 'frag/glitch.frag');
+        
+        this.load.audio('mainloop', 'ogg/mainloop.ogg');
+    }
+    
+    inputHandler()
+    {
+        if (game.sound.context.state === 'suspended') 
+        {
+            game.sound.context.resume();
+        }
     }
 
     create() {
@@ -56,8 +66,15 @@ class Main extends Phaser.Scene {
         ]
 
         this.glitchShader = this.add.shader('glitch', 0., 0., config.width, config.height).setOrigin(0, 0);
+        
+        var sfxconfig = { loop:true };
+        
+        this.sfx = this.sound.add('mainloop', sfxconfig);
+        this.sfx.play();
+        
+        this.input.on('pointerdown', this.inputHandler);
     }
-
+    
     update() {
         this.handleRussianAttacks();
         this.glitchShader.uniforms.amount.value = .1;
@@ -129,7 +146,6 @@ class Main extends Phaser.Scene {
             }
         }
     }
-
 }
 
 // TODO: error message
