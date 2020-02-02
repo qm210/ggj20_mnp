@@ -42,14 +42,13 @@ class Main extends Phaser.Scene {
         this.load.image('clockDate', "assets/os/ClockDate.png");
 
         this.load.glsl('glitch', 'frag/glitch.frag');
-        
+
         this.load.audio('mainloop', 'ogg/mainloop.ogg');
     }
-    
+
     inputHandler()
     {
-        if (game.sound.context.state === 'suspended') 
-        {
+        if (game.sound.context.state === 'suspended') {
             game.sound.context.resume();
         }
     }
@@ -73,15 +72,15 @@ class Main extends Phaser.Scene {
         ]
 
         this.glitchShader = this.add.shader('glitch', 0., 0., config.width, config.height).setOrigin(0, 0);
-        
+
         var sfxconfig = { loop:true };
-        
+
         this.sfx = this.sound.add('mainloop', sfxconfig);
         this.sfx.play();
-        
+
         this.input.on('pointerdown', this.inputHandler);
     }
-    
+
     update() {
         this.handleRussianAttacks();
         this.glitchShader.uniforms.amount.value = this.glitchLevel;
