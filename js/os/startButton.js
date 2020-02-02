@@ -1,9 +1,9 @@
-class StartButton extends Phaser.GameObjects.Image {
+class StartButton extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y, texture, textureClicked, scale) {
-        super(scene, x, y, texture);
+    constructor(scene, x, y, texture, frameUp, frameDown, scale) {
+        super(scene, x, y, texture, frameUp);
         this.scene = scene;
-        this.originalTexture = texture;
+        this.frameUp = frameUp;
 
         this.setInteractive({
             useHandCursor: true,
@@ -12,12 +12,12 @@ class StartButton extends Phaser.GameObjects.Image {
         this.setScale(scale);
 
         this.on('pointerdown', () => {
-            this.setTexture(textureClicked);
+            this.setFrame(frameDown);
         });
     }
 
     snapBack() {
-        this.setTexture(this.originalTexture);
+        this.setFrame(this.frameUp);
     }
 
 }

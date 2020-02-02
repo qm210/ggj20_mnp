@@ -7,11 +7,11 @@ class FileButton extends Phaser.GameObjects.Image {
         this.onDown = onDown || (() => {})
 
         scene.add.existing(this);
-        this.setOrigin(0, 0)
+        this.setOrigin(.5, .5)
             .setInteractive({useHandCursor: true})
             .on('pointerdown', this.onDown, scene);
 
-        this.labelText = scene.add.text(x + .5 * this.texture.getSourceImage().width, y + this.texture.getSourceImage().height, label, {
+        this.labelText = scene.add.text(x, y + .5 * this.texture.getSourceImage().height, label, {
                 font: "18px Arial",
                 fill: textColor
             })

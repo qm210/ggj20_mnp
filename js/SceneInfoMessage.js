@@ -1,9 +1,9 @@
-class ErrorMessage extends Phaser.Scene {
+class InfoMessage extends Phaser.Scene {
 
     static X = 800;
     static Y = 450;
-    static messageCenterDeltaX = 80;
-    static messageCenterDeltaY = -45;
+    static messageCenterDeltaX = -120;
+    static messageCenterDeltaY = -60;
 
     static textButtonStyles = {
         normal: {
@@ -21,7 +21,7 @@ class ErrorMessage extends Phaser.Scene {
     }
 
     constructor() {
-        super('ErrorMessage');
+        super('InfoMessage');
         this.parent = null;
     }
 
@@ -30,13 +30,16 @@ class ErrorMessage extends Phaser.Scene {
         this.message = data.message || '<unknown error>'
         this.deltaX = data.deltaX || 0
         this.deltaY = data.deltaY || 0
+        this.messageDeltaX = data.messageDeltaX || 0
+        this.messageDeltaY = data.messageDeltaY || 0
+
         if(!data.buttons) {
-            this.buttons = [ErrorMessage.defaultButton(this)];
+            this.buttons = [InfoMessage.defaultButton(this)];
         }
         else { // buttons given as objects: {deltaX: 40, deltaY: 0, text: 'Cancel'}
             this.buttons = []
             data.buttons.forEach(buttonPar => {
-                let templateButton = ErrorMessage.defaultButton(this);
+                let templateButton = InfoMessage.defaultButton(this);
                 templateButton.x += buttonPar.deltaX;
                 templateButton.y += buttonPar.deltaY;
                 templateButton.setText(buttonPar.text)
@@ -50,8 +53,8 @@ class ErrorMessage extends Phaser.Scene {
             })
         }
 
-        this.X = ErrorMessage.X + this.deltaX;
-        this.Y = ErrorMessage.Y + this.deltaY;
+        this.X = InfoMessage.X + this.deltaX;
+        this.Y = InfoMessage.Y + this.deltaY;
         this.buttons.forEach(button => {
             button.x += this.deltaX;
             button.y += this.deltaY;
@@ -60,10 +63,10 @@ class ErrorMessage extends Phaser.Scene {
 
     static defaultButton(scene) {
         return new TextButton(scene,
-            this.X + ErrorMessage.messageCenterDeltaX,
-            this.Y + ErrorMessage.messageCenterDeltaY + 130,
-            'Ok Sorry!',
-            ErrorMessage.textButtonStyles,
+            this.X + InfoMessage.messageCenterDeltaX + 45,
+            this.Y + InfoMessage.messageCenterDeltaY + 145,
+            'OH WELL...',
+            InfoMessage.textButtonStyles,
             () => {
                 scene.scene.stop();
             })
@@ -71,17 +74,17 @@ class ErrorMessage extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('errorMessageBG', 'assets/os/messageError.png');
+        this.load.image('InfoMessageBG', 'assets/os/messageInfo.png');
     }
 
     create() {
         // TODO: find out how to have a scene smaller than the screen; and how to find its borders
-        this.bg = this.add.image(this.X, this.Y, 'errorMessageBG')
+        this.bg = this.add.image(this.X, this.Y, 'InfoMessageBG')
             .setOrigin(0.5, 0.5);
 
         this.add.text(
-            this.X + ErrorMessage.messageCenterDeltaX,
-            this.Y + ErrorMessage.messageCenterDeltaY,
+            this.X + InfoMessage.messageCenterDeltaX + this.messageDeltaX,
+            this.Y + InfoMessage.messageCenterDeltaY + this.messageDeltaY,
             this.message,
             {
                 font: "25px Arial",
