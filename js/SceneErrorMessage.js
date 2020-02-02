@@ -2,8 +2,8 @@ class ErrorMessage extends Phaser.Scene {
 
     static X = 800;
     static Y = 450;
-    static messageCenterDeltaX = 80;
-    static messageCenterDeltaY = -45;
+    static messageCenterDeltaX = -180;
+    static messageCenterDeltaY = -65;
 
     static textButtonStyles = {
         normal: {
@@ -71,7 +71,7 @@ class ErrorMessage extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('errorMessageBG', 'assets/os/messageError.png');
+        this.load.image('errorMessageBG', 'assets/os/ErrorBox.png');
     }
 
     create() {

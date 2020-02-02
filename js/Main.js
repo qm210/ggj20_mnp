@@ -94,26 +94,26 @@ class Main extends Phaser.Scene {
         }
         this.startMenuOpen = true;
 
-        this.startMenuBG = this.add.image(this.buttonStart.getTopRight().x, this.buttonStart.getTopRight().y, 'startMenu').setOrigin(0, 1);
+        this.startMenuBG = this.add.image(this.buttonStart.getTopRight().x - 26, this.buttonStart.getTopRight().y + 43, 'startMenu').setOrigin(0, 1);
 
         this.startMenuButtonReboot = this.add.existing(new SimpleButton(this, {'key': 'startMenuReboot', 'up': 0, 'over': 1, 'down': 2,
-            'x': this.buttonStart.getTopRight().x,
-            'y': this.buttonStart.getTopRight().y - 30,
+            'x': this.buttonStart.getTopRight().x + 34,
+            'y': this.buttonStart.getTopRight().y + 26,
             'onDown': () => {this.clickRebootButton();}
         }));
         this.startMenuButtonSearch = this.add.existing(new SimpleButton(this, {'key': 'startMenuSearch', 'up': 0, 'over': 1, 'down': 2,
-            'x': this.buttonStart.getTopRight().x + 100,
-            'y': this.buttonStart.getTopRight().y - 30,
+            'x': this.buttonStart.getTopRight().x + 158,
+            'y': this.buttonStart.getTopRight().y + 23,
             'onDown': () => {this.clickSearchButton();}
         }));
         this.startMenuButtonUeX = this.add.existing(new SimpleButton(this, {'key': 'startMenuUeX', 'up': 0, 'over': 1, 'down': 2,
-            'x': this.buttonStart.getTopRight().x + 200,
-            'y': this.buttonStart.getTopRight().y - 30,
+            'x': this.buttonStart.getTopRight().x + 282,
+            'y': this.buttonStart.getTopRight().y + 20,
             'onDown': () => {this.openFileBrowser();}
         }));
         this.startMenuButtonNotes = this.add.existing(new SimpleButton(this, {'key': 'startMenuNotes', 'up': 0, 'over': 1, 'down': 2,
-            'x': this.buttonStart.getTopRight().x + 300,
-            'y': this.buttonStart.getTopRight().y - 30,
+            'x': this.buttonStart.getTopRight().x + 400,
+            'y': this.buttonStart.getTopRight().y + 19,
             'onDown': () => {this.openNotes();}
         }));
 

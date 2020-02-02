@@ -3,7 +3,7 @@ class ConfirmMessage extends Phaser.Scene {
     static X = 800;
     static Y = 450;
     static messageCenterDeltaX = 0;
-    static messageCenterDeltaY = -120;
+    static messageCenterDeltaY = -90;
 
     static textButtonStyles = {
         normal: {
@@ -89,7 +89,7 @@ class ConfirmMessage extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('ConfirmMessageBG', 'assets/os/messageConfirm.png');
+        this.load.image('ConfirmMessageBG', 'assets/os/ConfirmBox.png');
     }
 
     create() {

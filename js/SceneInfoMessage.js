@@ -2,8 +2,8 @@ class InfoMessage extends Phaser.Scene {
 
     static X = 800;
     static Y = 450;
-    static messageCenterDeltaX = -120;
-    static messageCenterDeltaY = -60;
+    static messageCenterDeltaX = -20;
+    static messageCenterDeltaY = -50;
 
     static textButtonStyles = {
         normal: {
@@ -74,7 +74,7 @@ class InfoMessage extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('InfoMessageBG', 'assets/os/messageInfo.png');
+        this.load.image('InfoMessageBG', 'assets/os/InfoBox.png');
     }
 
     create() {
