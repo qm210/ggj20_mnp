@@ -150,7 +150,6 @@ class FileBrowser extends Phaser.Scene {
             'x': FileBrowser.X + 400,
             'y': FileBrowser.Y + 465,
             'onDown': () => {this.formatUSB();},
-            'deactivated': true
         }).setOrigin(0, 0);
         this.statusBarEjectUSB = new SimpleButton(this, {
             'key': 'filebrowserEjectUSB',
@@ -283,7 +282,7 @@ class FileBrowser extends Phaser.Scene {
     }
 
     formatUSB() {
-        console.log('would open the Format USB dialog')
+        this.scene.launch('SceneFormatDialog', {'parent': this.parent});
     }
 
     ejectUSB() {
